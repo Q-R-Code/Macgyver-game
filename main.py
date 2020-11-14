@@ -23,11 +23,17 @@ while running:
     screen.blit(guardian.image, guardian.rect)
     maze = Maze()
     maze.generate()
-    maze.print(screen)
+    maze.print_maze(screen)
     pygame.display.flip()
 
-    if pressed.get(pygame.K_RIGHT) and macgyver.rect.x != maze.print(wall):
+    if pressed.get(pygame.K_RIGHT) and macgyver.rect.x + 60 < 900:
         macgyver.move_right()
+    elif pressed.get(pygame.K_LEFT) and macgyver.rect.x > 0:
+        macgyver.move_left()
+    elif pressed.get(pygame.K_UP) and macgyver.rect.y > 0:
+        macgyver.move_up()
+    elif pressed.get(pygame.K_DOWN) and macgyver.rect.y + 60 < 900:
+        macgyver.move_down()
 
 
     pygame.display.flip()
@@ -37,3 +43,8 @@ while running:
             running = False
             pygame.quit()
             print("Fermeture du jeu.")
+
+        elif event.type == pygame.KEYDOWN:
+            pressed[event.key] = True
+        elif event.type == pygame.KEYUP:
+            pressed[event.key] = False
