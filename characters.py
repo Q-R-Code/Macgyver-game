@@ -1,5 +1,4 @@
 import pygame
-from maze_map import *
 
 
 class Macgyver(pygame.sprite.Sprite):
@@ -33,6 +32,8 @@ class Macgyver(pygame.sprite.Sprite):
         self.image = pygame.image.load("images/macgyver_down.png")
         self.image = self.image = pygame.transform.scale(self.image, (60, 60))
         self.rect.y += self.velocity
+
+
 
 
 class Guardian(pygame.sprite.Sprite):

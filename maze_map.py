@@ -1,14 +1,25 @@
 import pygame
 from constantes import *
 
+"""
+Classe permettant de générer le labyrinthe.
+def generate :
+    Ouvre le fichier texte contenant le labyrinthe, créer un liste global pour la structure,
+    et ensuite, pour chaques lignes, creer une liste de celle ci.
+def print_maze :
+    parcours notre structure, si c'est un "W", y applique l'image d'un mur en 60x60.
+
+"""
+
 
 class Maze(pygame.sprite.Sprite):
 
     def __init__(self):
         super().__init__()
-
-        self.wall = pygame.image.load("images/wall.png")
-        self.rect = self.wall.get_rect()
+        self.image = pygame.image.load("images/wall.png")
+        self.rect = self.image.get_rect()
+        self.rect.x = 0
+        self.rect.y = 0
 
     def generate(self):
         maze_files = open("maze.txt", "r")
@@ -22,26 +33,17 @@ class Maze(pygame.sprite.Sprite):
         self.structure = maze_structure
 
     def print_maze(self, screen):
-        numb_ligne = 0
-        spawn = 0
-        end = 0
+        num_ligne = 0
         for ligne in self.structure:
-            numb_colonne = 0
+            num_colonne = 0
             for letters in ligne:
-                x = numb_colonne * taille_sprite
-                y = numb_ligne * taille_sprite
+                x = num_colonne * taille_sprite
+                y = num_ligne * taille_sprite
                 if letters == "O":
                     pass
                 elif letters == "W":
-                    screen.blit(self.wall, (x, y))
-                elif letters == "A":
-                    spawn += 1
-                elif letters == "B":
-                    end += 1
+                    screen.blit(self.image,(x, y))
                 else:
                     pass
-                numb_colonne += 1
-            numb_ligne += 1
-
-    def check_collision(self, macgyver):
-        return pygame.sprite.spritecollide(macgyver,self.wall, False, pygame.sprite.collide_mask)
+                num_colonne += 1
+            num_ligne += 1
