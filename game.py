@@ -9,7 +9,11 @@ def launch(macgyver, guardian, maze):
     pygame.display.set_caption("MacGyver GO GO GO")
     screen = pygame.display.set_mode((taille_fenetre, taille_fenetre))
     background = pygame.image.load("images/background.png")
+    #Dictionnaire pour le deplacement de macgyver
     pressed = {}
+    #Géneration de la structure du labyrinthe et enregistrement des cases.
+    maze.generate()
+    maze.structure_rect()
 
 
     running = True
@@ -18,8 +22,7 @@ def launch(macgyver, guardian, maze):
         screen.blit(background, (0, 0))
         screen.blit(macgyver.image, macgyver.rect)
         screen.blit(guardian.image, guardian.rect)
-        # Géneration du labyrinthe
-        maze.generate()
+        #Affichage des murs par Pygame
         maze.print_maze(screen)
 
         # Déplacement de Macgyver

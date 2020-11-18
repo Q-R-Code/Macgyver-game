@@ -1,5 +1,5 @@
 import pygame
-
+from maze_map import Maze
 
 class Macgyver(pygame.sprite.Sprite):
 
