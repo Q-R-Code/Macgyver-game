@@ -1,10 +1,26 @@
 import pygame
-from pygame.locals import *
 from constantes import *
 
+"""
+Classe permettant de générer le labyrinthe.
+def generate :
+    Ouvre le fichier texte contenant le labyrinthe, créer un liste global pour la structure,
+    et ensuite, pour chaques lignes, creer une liste de celle ci.
+def print_maze :
+    parcours notre structure, si c'est un "W", y applique l'image d'un mur en 60x60.
+
+"""
 
 
-class Maze:
+class Maze(pygame.sprite.Sprite):
+
+    def __init__(self):
+        super().__init__()
+        self.image = pygame.image.load("images/wall.png")
+        self.rect = self.image.get_rect()
+        self.rect.x = 0
+        self.rect.y = 0
+        self.all_wall = pygame.sprite.Group()
 
     def generate(self):
         maze_files = open("maze.txt", "r")
@@ -15,32 +31,42 @@ class Maze:
                 if letters != "\n":
                     maze_ligne.append(letters)
             maze_structure.append(maze_ligne)
-        print(maze_structure)
         self.structure = maze_structure
 
-    def print(self, screen):
-        numb_ligne = 0
-        numb_O = 0
-        numb_W = 0
-        #sol = pygame.image.load("images/background.png", (60, 60))
-        wall = pygame.image.load("images/wall.png")
+    def print_maze(self, screen):
+        num_ligne = 0
         for ligne in self.structure:
-            numb_colonne = 0
+            num_colonne = 0
             for letters in ligne:
-                x = numb_colonne * taille_sprite
-                y = numb_ligne * taille_sprite
-                if letters == "O":
-
-                    numb_O += 1
-                elif letters == "W":
-                    screen.blit(wall, (x, y))
-                    numb_W += 1
-                elif letters != "O" and "W":
-                    print(str(letters))
+                x = num_colonne * taille_sprite
+                y = num_ligne * taille_sprite
+                if letters == "W":
+                    self.rect.x = x
+                    self.rect.y = y
+                    screen.blit(self.image, (x, y))
                 else:
                     pass
-                numb_colonne += 1
-            numb_ligne += 1
-        print(numb_ligne, numb_colonne)
-        print(numb_W, numb_O)
+                num_colonne += 1
+            num_ligne += 1
 
+    def structure_rect(self):
+        wall_rect = []
+        empty_rect = []
+        num_ligne = 0
+        for ligne in self.structure:
+            num_colonne = 0
+            for letters in ligne:
+                x = num_colonne * taille_sprite
+                y = num_ligne * taille_sprite
+                if letters == "O":
+                    pass
+                elif letters == "W":
+                    self.rect = self.image.get_rect()
+                    self.rect.x = x
+                    self.rect.y = y
+                    wall_rect.append(self.rect)
+                else:
+                    pass
+                num_colonne += 1
+            num_ligne += 1
+        print(wall_rect, "\n", empty_rect)
