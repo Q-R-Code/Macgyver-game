@@ -3,17 +3,22 @@ from constantes import *
 from maze_map import Maze
 
 
+def check_collide(sprite, group):
+    return pygame.sprite.spritecollide(sprite, group, False, pygame.sprite.collide_mask)
+
+
 def launch(macgyver, guardian, maze):
-    #Initialisation de Pygame & création de la fenetre avec son fond d'ecran.
+    # Initialisation de Pygame & création de la fenetre avec son fond d'ecran.
     pygame.init()
     pygame.display.set_caption("MacGyver GO GO GO")
     screen = pygame.display.set_mode((taille_fenetre, taille_fenetre))
     background = pygame.image.load("images/background.png")
-    #Dictionnaire pour le deplacement de macgyver
+    # Dictionnaire pour le deplacement de macgyver
     pressed = {}
-    #Géneration de la structure du labyrinthe et enregistrement des cases.
+    # Géneration de la structure du labyrinthe et enregistrement des cases.
     maze.generate()
     maze.structure_rect()
+    maze.get_structure()
 
 
     running = True
@@ -22,8 +27,9 @@ def launch(macgyver, guardian, maze):
         screen.blit(background, (0, 0))
         screen.blit(macgyver.image, macgyver.rect)
         screen.blit(guardian.image, guardian.rect)
-        #Affichage des murs par Pygame
+        # Affichage des murs par Pygame
         maze.print_maze(screen)
+
 
         # Déplacement de Macgyver
         if pressed.get(pygame.K_RIGHT) and macgyver.rect.x + 60 < 900:
@@ -34,9 +40,9 @@ def launch(macgyver, guardian, maze):
             macgyver.move_up()
         elif pressed.get(pygame.K_DOWN) and macgyver.rect.y + 60 < 900:
             macgyver.move_down()
-        #Rafraichissement de l'écran.
+        # Rafraichissement de l'écran.
         pygame.display.flip()
-        #Gestion des évenements dans Pygame.
+        # Gestion des évenements dans Pygame.
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
@@ -46,6 +52,3 @@ def launch(macgyver, guardian, maze):
                 pressed[event.key] = True
             elif event.type == pygame.KEYUP:
                 pressed[event.key] = False
-
-
-

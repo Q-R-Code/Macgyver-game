@@ -12,14 +12,20 @@ def print_maze :
 """
 
 
-class Maze(pygame.sprite.Sprite):
+class MazeSprite(pygame.sprite.Sprite):
 
-    def __init__(self):
+    def __init__(self, x, y):
         super().__init__()
         self.image = pygame.image.load("images/wall.png")
         self.rect = self.image.get_rect()
-        self.rect.x = 0
-        self.rect.y = 0
+        self.rect.x = x
+        self.rect.y = y
+
+
+class Maze():
+
+    def __init__(self):
+        self.structure = None
         self.all_wall = pygame.sprite.Group()
 
     def generate(self):
@@ -33,6 +39,11 @@ class Maze(pygame.sprite.Sprite):
             maze_structure.append(maze_ligne)
         self.structure = maze_structure
 
+    def get_structure(self):
+        print(self.structure)
+        return self.structure
+
+
     def print_maze(self, screen):
         num_ligne = 0
         for ligne in self.structure:
@@ -41,17 +52,14 @@ class Maze(pygame.sprite.Sprite):
                 x = num_colonne * taille_sprite
                 y = num_ligne * taille_sprite
                 if letters == "W":
-                    self.rect.x = x
-                    self.rect.y = y
-                    screen.blit(self.image, (x, y))
+                    maze_sprite = MazeSprite(x, y)
+                    screen.blit(maze_sprite.image, (x, y))
                 else:
                     pass
                 num_colonne += 1
             num_ligne += 1
 
     def structure_rect(self):
-        wall_rect = []
-        empty_rect = []
         num_ligne = 0
         for ligne in self.structure:
             num_colonne = 0
@@ -61,12 +69,12 @@ class Maze(pygame.sprite.Sprite):
                 if letters == "O":
                     pass
                 elif letters == "W":
-                    self.rect = self.image.get_rect()
-                    self.rect.x = x
-                    self.rect.y = y
-                    wall_rect.append(self.rect)
+                    maze_sprite = MazeSprite(x, y)
+                    self.all_wall.add(maze_sprite)
                 else:
                     pass
                 num_colonne += 1
             num_ligne += 1
-        print(wall_rect, "\n", empty_rect)
+
+    def return_all_wall(self):
+        return self.all_wall
