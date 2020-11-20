@@ -40,7 +40,7 @@ class Maze():
         self.structure = maze_structure
 
     def get_structure(self):
-        print(self.structure)
+        print(self.structure[0][14])
         return self.structure
 
 

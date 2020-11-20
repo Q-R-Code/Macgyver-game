@@ -1,5 +1,5 @@
 import pygame
-from game import check_collide
+
 
 
 class Macgyver(pygame.sprite.Sprite):
@@ -8,35 +8,46 @@ class Macgyver(pygame.sprite.Sprite):
         super().__init__()
         self.maze = maze
         self.image = pygame.image.load("images/macgyver_right.png")
-        self.image = pygame.transform.scale(self.image, (60, 60))
+        self.image = pygame.transform.scale(self.image, (55, 55))
         self.rect = self.image.get_rect()
         self.case_x = 0
         self.case_y = 14
-        self.rect.x = 0
-        self.rect.y = 840
-        self.velocity = 5
+        self.x = 0
+        self.y = 845
+
 
     def move_right(self):
         if self.maze.structure[self.case_y][self.case_x + 1] != "W":
             self.case_x += 1
             self.image = pygame.image.load("images/macgyver_right.png")
-            self.image = self.image = pygame.transform.scale(self.image, (60, 60))
-            self.rect.x += self.case_x * 60
+            self.image = self.image = pygame.transform.scale(self.image, (55, 55))
+            self.x = self.case_x * 60
 
     def move_left(self):
-        self.image = pygame.image.load("images/macgyver_left.png")
-        self.image = self.image = pygame.transform.scale(self.image, (60, 60))
-        self.rect.x -= self.velocity
+        if self.maze.structure[self.case_y][self.case_x - 1] != "W":
+            self.image = pygame.image.load("images/macgyver_left.png")
+            self.image = pygame.transform.scale(self.image, (55, 55))
+            self.case_x -= 1
+            self.x = self.case_x * 60
 
     def move_up(self):
-        self.image = pygame.image.load("images/macgyver_up.png")
-        self.image = self.image = pygame.transform.scale(self.image, (60, 60))
-        self.rect.y -= self.velocity
+        if self.maze.structure[self.case_y - 1][self.case_x] != "W":
+            self.image = pygame.image.load("images/macgyver_up.png")
+            self.image = pygame.transform.scale(self.image, (55, 55))
+            self.case_y -= 1
+            self.y = self.case_y * 60
+            print(self.case_x)
+            print(self.case_y)
+
+
 
     def move_down(self):
-        self.image = pygame.image.load("images/macgyver_down.png")
-        self.image = self.image = pygame.transform.scale(self.image, (60, 60))
-        self.rect.y += self.velocity
+        if self.maze.structure[self.case_y + 1][self.case_x] != "W":
+            self.image = pygame.image.load("images/macgyver_down.png")
+            self.image = pygame.transform.scale(self.image, (55, 55))
+            self.case_y += 1
+            self.y = self.case_y * 60
+
 
 
 class Guardian(pygame.sprite.Sprite):
