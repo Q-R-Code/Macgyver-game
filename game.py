@@ -1,6 +1,20 @@
 import pygame
-from constantes import *
-from maze_map import Maze
+from constantes import taille_fenetre
+from objects import Objects
+
+"""
+Def check_collide : Utilisation de la notion de collision par Pygame pour l'entrainement. Fonction pas forcement
+utile mais présente donc pourquoi ce priver :) 
+
+Def launch : 
+Initialise le jeu.
+-Lance Pygame
+-Genere la Labyrinthe
+-Genere les objets
+
+Lance la boucle du jeu. 
+
+"""
 
 
 def check_collide(sprite, group):
@@ -16,9 +30,14 @@ def launch(macgyver, guardian, maze):
 
     # Géneration de la structure du labyrinthe et enregistrement des cases.
     maze.generate()
-    maze.structure_rect()
-    maze.get_structure()
 
+    # Generation des trois objets.
+    item1 = pygame.image.load("images/objet1.png")
+    item2 = pygame.image.load("images/objet2.png")
+    item3 = pygame.image.load("images/objet3.png")
+    objet1 = Objects(maze, item1)
+    objet2 = Objects(maze, item2)
+    objet3 = Objects(maze, item3)
 
     running = True
     while running:
@@ -26,6 +45,9 @@ def launch(macgyver, guardian, maze):
         screen.blit(background, (0, 0))
         screen.blit(macgyver.image, (macgyver.x, macgyver.y))
         screen.blit(guardian.image, guardian.rect)
+        screen.blit(objet1.image, (objet1.x, objet1.y))
+        screen.blit(objet2.image, (objet2.x, objet2.y))
+        screen.blit(objet3.image, (objet3.x, objet3.y))
         # Affichage des murs par Pygame
         maze.print_maze(screen)
 
@@ -46,5 +68,3 @@ def launch(macgyver, guardian, maze):
                     macgyver.move_up()
                 elif event.key == pygame.K_DOWN and macgyver.y + 55 < 845:
                     macgyver.move_down()
-
-
