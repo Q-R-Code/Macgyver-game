@@ -3,8 +3,6 @@ from constantes import taille_fenetre
 from objects import Objects
 
 """
-Def check_collide : Utilisation de la notion de collision par Pygame pour l'entrainement. Fonction pas forcement
-utile mais présente donc pourquoi ce priver :) 
 
 Def launch : 
 Initialise le jeu.
@@ -15,10 +13,6 @@ Initialise le jeu.
 Lance la boucle du jeu. 
 
 """
-
-
-def check_collide(sprite, group):
-    return pygame.sprite.spritecollide(sprite, group, False, pygame.sprite.collide_mask)
 
 
 def launch(macgyver, guardian, maze):
@@ -35,9 +29,9 @@ def launch(macgyver, guardian, maze):
     item1 = pygame.image.load("images/objet1.png")
     item2 = pygame.image.load("images/objet2.png")
     item3 = pygame.image.load("images/objet3.png")
-    objet1 = Objects(maze, item1)
-    objet2 = Objects(maze, item2)
-    objet3 = Objects(maze, item3)
+    objet1 = Objects(maze, item1, name="*1")
+    objet2 = Objects(maze, item2, name="*2")
+    objet3 = Objects(maze, item3, name="*3")
 
     running = True
     while running:
@@ -50,6 +44,9 @@ def launch(macgyver, guardian, maze):
         screen.blit(objet3.image, (objet3.x, objet3.y))
         # Affichage des murs par Pygame
         maze.print_maze(screen)
+        macgyver.check_obejct(objet1, objet2, objet3)
+
+        guardian.check_victory()
 
         # Rafraichissement de l'écran.
         pygame.display.flip()
