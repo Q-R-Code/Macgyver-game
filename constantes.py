@@ -1,6 +1,6 @@
 """
 Les constantes de notre jeu pour un labyrinthe de 15 cases sur 15.
-J'ai fais le choix de partir sur une résolution de 900x900 donc chaque sprites font 60x60
+J'ai fais le choix de partir sur une résolution de 900x900 donc chaques sprites font 60x60
 
 """
 nombre_sprite = 15

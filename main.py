@@ -1,8 +1,6 @@
 from characters import Macgyver, Guardian
-from game import launch
+from game import Game
 from maze_map import Maze
-from objects import Objects
-
 
 
 def main():
@@ -12,7 +10,9 @@ def main():
     guardian = Guardian(maze, macgyver)
 
     # Initialisation du jeu.
-    launch(macgyver, guardian, maze)
+    game = Game(macgyver, guardian, maze)
+    game.launch_home()
+
 
 if __name__ == '__main__':
     main()

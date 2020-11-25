@@ -89,9 +89,5 @@ class Guardian(pygame.sprite.Sprite):
         self.rect.x = 840
         self.rect.y = 0
 
-    def check_victory(self):
-        if self.maze.structure[self.macgyver.case_y][self.macgyver.case_x] == "B":
-            if self.macgyver.compteur.count("*") == 3:
-                print("YOU WIN")
-            else:
-                print("YOU DIE")
+
+
