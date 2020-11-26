@@ -4,10 +4,12 @@ from maze_map import Maze
 
 
 def main():
-    # On charge MacGyver, le Gardien et le labyrinthe.
+    """
+     Initialize the game and launch the first loop.
+    """
     maze = Maze()
     macgyver = Macgyver(maze)
-    guardian = Guardian(maze, macgyver)
+    guardian = Guardian()
 
     # Initialisation du jeu.
     game = Game(macgyver, guardian, maze)

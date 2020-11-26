@@ -18,4 +18,3 @@ Touts les images de ce mini-jeu ont été réalisées par le Youtubeur / Graphis
 [Bienvenue chez les fous](https://www.youtube.com/channel/UCIBuhfY5I16cNh36wFXc6zA "Lien vers la chaine du fou!"),
 merci à lui ! 
 
-... WORK IN PROGRESS ... 

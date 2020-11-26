@@ -1,31 +1,22 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+This module is for the different loops of the game and the initialize of Pygame.
+"""
 import pygame
+
+from characters import Macgyver, Guardian
 from constantes import taille_fenetre
+from maze_map import Maze
 from objects import Objects
-
-"""
-Classe Game :
-Cette classe gere les ecrans de jeu, divisé en 3 méthodes. 
-Elle initialise Pygame.
-
-Def launch_home :
-    L'ecran d'acceuil.
-Def launch_maze : 
-    Generation du labyrinthe, des trois objets, du fond d'ecran du niveau.
-    La boucle du jeu : 
-        Elle gere les deplacements, elle vérifie si MacGyver passe sur un objet
-        et si il est sur la case de sortie. 
-Def launch_end : 
-    L'ecran de fin. 
-    On vérifie dans un premier temps le compteur de MacGyver : si 3 objets, Victoire
-    sinon : Défaite.
-    Possibilité de quitter graçe à ECHAP ou relancer avec F1.
-
-"""
 
 
 class Game:
+    """
+    This class allows to create the 3 screen. The home, the maze and the end.
+    """
 
-    def __init__(self, macgyver, guardian, maze):
+    def __init__(self, macgyver: Macgyver, guardian: Guardian, maze: Maze):
         self.macgyver = macgyver
         self.guardian = guardian
         self.maze = maze
@@ -34,11 +25,14 @@ class Game:
         self.screen = pygame.display.set_mode((taille_fenetre, taille_fenetre))
 
     def launch_home(self):
+        """
+        First screen of the game, with a simple loop for pygame. press space will launch the next part.
+
+        """
         home = pygame.image.load("images/accueil.png")
         running_home = True
         while running_home:
             self.screen.blit(home, (0, 0))
-
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running_home = False
@@ -51,11 +45,15 @@ class Game:
             pygame.display.flip()
 
     def launch_maze(self):
-        # On ajoute l'image du fond d'ecran.
+        """
+        The main loop of this game, import the maze's structure, generate the walls from it and generate the objects.
+
+
+        """
         background = pygame.image.load("images/background.png")
-        # Géneration de la structure du labyrinthe et enregistrement des cases.
+
         self.maze.generate()
-        # Generation des trois objets.
+
         item1 = pygame.image.load("images/objet1.png")
         item2 = pygame.image.load("images/objet2.png")
         item3 = pygame.image.load("images/objet3.png")
@@ -64,9 +62,8 @@ class Game:
         objet3 = Objects(self.maze, item3, name="*3")
 
         running_maze = True
-
         while running_maze:
-            # On applique les images à notre jeu
+            # Adding the sprites to our surface "screen".
             self.screen.blit(background, (0, 0))
             self.screen.blit(self.macgyver.image, (self.macgyver.x, self.macgyver.y))
             self.screen.blit(self.guardian.image, self.guardian.rect)
@@ -74,24 +71,21 @@ class Game:
             self.screen.blit(objet2.image, (objet2.x, objet2.y))
             self.screen.blit(objet3.image, (objet3.x, objet3.y))
 
-            # Affichage des murs par Pygame
             self.maze.print_maze(self.screen)
-            self.macgyver.check_obejct(objet1, objet2, objet3)
+            self.macgyver.check_object(objet1, objet2, objet3)
 
-            # On vérifie si macgyver est sur la case de la sortie, si oui, on lance la fin.
+            # check if Macgyver is on the exit (B).
             if self.maze.structure[self.macgyver.case_y][self.macgyver.case_x] == "B":
                 running_maze = False
-                self.launch_end()
+                self.end_screen()
             else:
                 pass
-
-            # Gestion des évenements dans Pygame.
+            # Events for closing the window or events on the keyboard.
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running_maze = False
                     pygame.quit()
                     print("Fermeture du jeu.")
-
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_RIGHT and self.macgyver.x + 55 < 845:
                         self.macgyver.move_right()
@@ -101,35 +95,38 @@ class Game:
                         self.macgyver.move_up()
                     elif event.key == pygame.K_DOWN and self.macgyver.y + 55 < 845:
                         self.macgyver.move_down()
-            # Rafraichissement de l'écran.
+            # Refresh the screen
             pygame.display.flip()
 
-    def launch_end(self):
+    def end_screen(self):
+        """
+        The last loop of the game, generates a screen based on the victory or defeat.
+        Allows to exit with ESCAPE or rerun the game with F1.
+
+        """
         victory = pygame.image.load("images/WIN.png")
         loose = pygame.image.load("images/loose.png")
 
         running_end = True
-
         while running_end:
-            if self.macgyver.compteur.count("*") == 3:
+            if self.macgyver.counter.count("*") == 3:
                 self.screen.blit(victory, (0, 0))
-            elif self.macgyver.compteur.count("*") != 3:
+            elif self.macgyver.counter.count("*") != 3:
                 self.screen.blit(loose, (0, 0))
-
+            pygame.display.flip()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running_end = False
                     pygame.quit()
                     print("Fermeture du jeu.")
-
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
                         running_end = False
                         pygame.quit()
                         print("Fermeture du jeu.")
                     elif event.key == pygame.K_F1:
+                        self.macgyver = Macgyver(self.maze)
                         self.launch_home()
                         running_end = False
                     else:
                         pass
-            pygame.display.flip()

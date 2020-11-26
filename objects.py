@@ -1,23 +1,30 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""
+This module is for the generation of the objects.
+
+"""
+
 import pygame
 import random
-from constantes import taille_sprite
 
-"""
-Classe permettant de creer un Objet avec un emplacement aleatoire dans notre structure définit dans Maze_map.
-Utilisation de Random pour lui donner un x et un y compris entre 0 et 14 ( notre structure comporte 15 listes 
-de 15 caractéres). Une boucle pour vérifier si cet emplacement est vide.
-
-"""
+from constantes import taille_sprite, taille_objet
+from maze_map import Maze
 
 
 class Objects(pygame.sprite.Sprite):
+    """
+    When we generate a object, it is checking the structure of the maze, to know if its empty or a wall.
+    For each objects, the letter of the box change. ( i choose "*1", "*2", "*3" ...)
+    """
 
-    def __init__(self, maze, image, name):
+    def __init__(self, maze: Maze, image, name):
         super().__init__()
         self.name = name
         self.maze = maze
         self.image = image
-        self.image = pygame.transform.scale(self.image, (55, 55))
+        self.image = pygame.transform.scale(self.image, (taille_objet, taille_objet))
         self.rect = self.image.get_rect()
         empty_position = False
         while empty_position == False:
