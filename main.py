@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+
 from characters import Macgyver, Guardian
 from game import Game
 from maze_map import Maze
@@ -11,7 +15,6 @@ def main():
     macgyver = Macgyver(maze)
     guardian = Guardian()
 
-    # Initialisation du jeu.
     game = Game(macgyver, guardian, maze)
     game.launch_home()
 
