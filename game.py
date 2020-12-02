@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-This module is for the different loops of the game and the initialize of Pygame.
+This module is for the differents loops of the game and the initialize of Pygame.
 """
 import pygame
 
@@ -13,7 +13,7 @@ from objects import Objects
 
 class Game:
     """
-    This class allows to create the 3 screen. The home, the maze and the end.
+    This class allows to create the 3 screens. The home, the maze and the end.
     """
 
     def __init__(self, macgyver: Macgyver, guardian: Guardian, maze: Maze):
