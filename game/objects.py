@@ -9,8 +9,8 @@ This module is for the generation of the objects.
 import pygame
 import random
 
-from constantes import taille_sprite, taille_objet
-from maze_map import Maze
+from game.constantes import taille_sprite, taille_objet
+from game.maze_map import Maze
 
 
 class Objects(pygame.sprite.Sprite):
