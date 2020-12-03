@@ -1,3 +1,5 @@
+
+
 # Projet 3 : Aidez MAcGyver à s'échapper!
 ***********************************************
 
@@ -11,6 +13,8 @@ disposés aléatoirement dans le niveau puis se présenter au gardien.*
 ## Présentation du projet :
 
 Le projet est réalisé en python, l'interface graphique se fait grâce au module Pygame.
+
+
 Concernant le labyrinthe, il sera généré depuis un fichier texte, il n'y a qu'un seul niveau.
 
 

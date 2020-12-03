@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 
 
-from characters import Macgyver, Guardian
-from game import Game
-from maze_map import Maze
+from game.characters import Macgyver, Guardian
+from game.game import Game
+from game.maze_map import Maze
 
 
 def main():

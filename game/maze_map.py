@@ -8,7 +8,7 @@ This module is for, the generation of the maze from a text files, and the sprite
 
 import pygame
 
-from constantes import taille_sprite
+from game.constantes import taille_sprite
 
 
 class Maze:
@@ -30,7 +30,7 @@ class Maze:
         we create a list of list for saving the structure. ( lines and columns )
 
         """
-        maze_file = open("maze.txt", "r")
+        maze_file = open("resources/maze.txt", "r")
         maze_structure = []
         for lines in maze_file:
             maze_line = []
@@ -67,7 +67,7 @@ class MazeSprite(pygame.sprite.Sprite):
 
     def __init__(self, x, y):
         super().__init__()
-        self.image = pygame.image.load("images/wall.png")
+        self.image = pygame.image.load("resources/images/wall.png")
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y

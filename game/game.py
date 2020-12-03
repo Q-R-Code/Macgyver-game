@@ -5,10 +5,10 @@ This module is for the differents loops of the game and the initialize of Pygame
 """
 import pygame
 
-from characters import Macgyver, Guardian
-from constantes import taille_fenetre
-from maze_map import Maze
-from objects import Objects
+from game.characters import Macgyver, Guardian
+from game.constantes import taille_fenetre
+from game.maze_map import Maze
+from game.objects import Objects
 
 
 class Game:
@@ -29,7 +29,7 @@ class Game:
         First screen of the game, with a simple loop for pygame. press space will launch the next part.
 
         """
-        home = pygame.image.load("images/accueil.png")
+        home = pygame.image.load("resources/images/accueil.png")
         running_home = True
         while running_home:
             self.screen.blit(home, (0, 0))
@@ -50,13 +50,13 @@ class Game:
 
 
         """
-        background = pygame.image.load("images/background.png")
+        background = pygame.image.load("resources/images/background.png")
 
         self.maze.generate()
 
-        item1 = pygame.image.load("images/objet1.png")
-        item2 = pygame.image.load("images/objet2.png")
-        item3 = pygame.image.load("images/objet3.png")
+        item1 = pygame.image.load("resources/images/objet1.png")
+        item2 = pygame.image.load("resources/images/objet2.png")
+        item3 = pygame.image.load("resources/images/objet3.png")
         objet1 = Objects(self.maze, item1, name="*1")
         objet2 = Objects(self.maze, item2, name="*2")
         objet3 = Objects(self.maze, item3, name="*3")
@@ -104,8 +104,8 @@ class Game:
         Allows to exit with ESCAPE or rerun the game with F1.
 
         """
-        victory = pygame.image.load("images/WIN.png")
-        loose = pygame.image.load("images/loose.png")
+        victory = pygame.image.load("resources/images/WIN.png")
+        loose = pygame.image.load("resources/images/loose.png")
 
         running_end = True
         while running_end:
