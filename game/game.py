@@ -46,7 +46,7 @@ class Game:
 
     def launch_maze(self):
         """
-        The main loop of this game, import the maze's structure, generate the walls from it and generate the objects.
+        The main loop of this game, import the maze's structure, generates the walls from it and the objects.
 
 
         """

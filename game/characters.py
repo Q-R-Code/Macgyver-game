@@ -3,20 +3,20 @@
 
 """
 This module defines two classes :
-* Macgyver, the hero
+* Macgyver, the hero, with 4 methods for the moves, and one for the counter and the objects.
 * Guardian, the boss
-
 """
 
 import pygame
 
 from game.constantes import taille_perso, taille_sprite
 from game.maze_map import Maze
+from game.objects import Objects
 
 
 class Macgyver(pygame.sprite.Sprite):
     """
-    We generate Macgyver directly with Pygame. For each moves, it checks if the next box is an  wall.
+    We generate Macgyver directly with Pygame. For each moves, it checks if the next box is a  wall.
     """
 
     def __init__(self, maze: Maze):
@@ -60,7 +60,7 @@ class Macgyver(pygame.sprite.Sprite):
             self.case_y += 1
             self.y = self.case_y * taille_sprite
 
-    def check_object(self, object1, object2, object3):
+    def check_object(self, object1: Objects, object2: Objects, object3: Objects):
         """
         If its an object, transform the objects sprite, replace the box as empty and add "*" to the counter list.
 

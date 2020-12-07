@@ -20,7 +20,7 @@ class Maze:
     def __init__(self):
         self.structure = None
 
-    def generate(self):
+    def generate(self) -> list:
         """
         open a text files including 15 lines and 15 columns.
         A = the start
@@ -40,7 +40,7 @@ class Maze:
             maze_structure.append(maze_line)
         self.structure = maze_structure
 
-    def print_maze(self, screen):
+    def print_maze(self, screen: "Pygame surface"):
         """
         check the structure, if its a W : add to it a wall sprite.
 
@@ -65,7 +65,7 @@ class MazeSprite(pygame.sprite.Sprite):
     Generate the sprite of a wall for pygame.
     """
 
-    def __init__(self, x, y):
+    def __init__(self, x: int, y: int):
         super().__init__()
         self.image = pygame.image.load("resources/images/wall.png")
         self.rect = self.image.get_rect()
