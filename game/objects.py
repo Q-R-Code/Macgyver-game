@@ -16,10 +16,10 @@ from game.maze_map import Maze
 class Objects(pygame.sprite.Sprite):
     """
     When we generate a object, it is checking the structure of the maze, to know if its empty or a wall.
-    For each objects, the letter of the box change. ( i choose "*1", "*2", "*3" ...)
+    For each objects, the letter of the box change. ( I choose "*1", "*2", "*3" ...)
     """
 
-    def __init__(self, maze: Maze, image, name):
+    def __init__(self, maze: Maze, image: "Image path", name: str):
         super().__init__()
         self.name = name
         self.maze = maze
@@ -27,7 +27,7 @@ class Objects(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(self.image, (taille_objet, taille_objet))
         self.rect = self.image.get_rect()
         empty_position = False
-        while empty_position == False:
+        while not empty_position:
             self.case_x = random.randint(0, 14)
             self.case_y = random.randint(0, 14)
             if self.maze.structure[self.case_y][self.case_x] == "O":
