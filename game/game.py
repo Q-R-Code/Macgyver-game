@@ -7,7 +7,7 @@ import pygame
 
 from game.characters import Macgyver, Guardian
 from game.constantes import taille_fenetre, loose_screen, victory_screen, background_screen, home_screen, \
-    item1, item2, item3
+    item1, item2, item3, backpack, number_0, number_1, number_2, number_3
 from game.maze_map import Maze
 from game.objects import Objects
 
@@ -69,8 +69,21 @@ class Game:
             self.screen.blit(objet2.image, (objet2.x, objet2.y))
             self.screen.blit(objet3.image, (objet3.x, objet3.y))
 
+
             self.maze.print_maze(self.screen)
+            self.screen.blit(backpack, (0, 780))
             self.macgyver.check_object(objet1, objet2, objet3)
+
+            if not self.macgyver.counter:
+                self.screen.blit(number_0, (60, 780))
+            elif len(self.macgyver.counter) == 1:
+                self.screen.blit(number_1, (60, 780))
+            elif len(self.macgyver.counter) == 2:
+                self.screen.blit(number_2, (60, 780))
+            elif len(self.macgyver.counter) == 3:
+                self.screen.blit(number_3, (60, 780))
+            else :
+                pass
 
             # check if Macgyver is on the exit (B).
             if self.maze.structure[self.macgyver.case_y][self.macgyver.case_x] == "B":

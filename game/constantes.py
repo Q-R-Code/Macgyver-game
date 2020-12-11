@@ -19,7 +19,14 @@ macgyver_down = pygame.image.load("resources/images/macgyver_down.png")
 
 guardian = pygame.image.load("resources/images/gardien.png")
 
+backpack = pygame.image.load("resources/images/backpack.png")
+number_0 = pygame.image.load("resources/images/number_0.png")
+number_1 = pygame.image.load("resources/images/number_1.png")
+number_2 = pygame.image.load("resources/images/number_2.png")
+number_3 = pygame.image.load("resources/images/number_3.png")
+
 wall = pygame.image.load("resources/images/wall.png")
+
 
 item1 = pygame.image.load("resources/images/objet1.png")
 item2 = pygame.image.load("resources/images/objet2.png")

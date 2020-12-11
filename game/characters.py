@@ -79,6 +79,10 @@ class Macgyver(pygame.sprite.Sprite):
             object3.image = pygame.transform.scale(self.image, (0, 0))
             self.counter.append("*")
 
+    def print_counter(self):
+        """
+        This methode is for the counter in-game
+        """
 
 class Guardian(pygame.sprite.Sprite):
     """
